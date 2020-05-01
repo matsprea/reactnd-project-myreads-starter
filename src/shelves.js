@@ -1,6 +1,6 @@
 const shelves = [{
         id: 'currentlyReading',
-        name: 'Currently Reading',
+        name: 'Currently reading',
     },
     {
         id: 'wantToRead',
