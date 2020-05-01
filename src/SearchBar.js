@@ -1,30 +1,27 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const SearchBar = ({ searchText, updateSearchText }) => {
-  return (
-    <div className="search-books-bar">
+const SearchBar = ({ updateSearch }) => {
+  const [searchText, setSearchText] = useState('');
+
+  const updateSearchText = (event) => {
+    setSearchText(event.target.value);
+    updateSearch(searchText.trim());
+  }
+
+  return <div className="search-books-bar">
       <Link className="close-search" to="/">
         Close
       </Link>
       <div className="search-books-input-wrapper">
-        <form>
-          <input
-            type="text"
-            name="search"
-            onChange={(event) => updateSearchText(event.target.value.trim())}
-            value={searchText}
-            placeholder="Search Books"
-          />
-        </form>
+          <input type="text" name="search" onChange={updateSearchText} value={searchText} placeholder="Search Books" />
       </div>
-    </div>
-  );
+    </div>;
 };
 
-SearchBar.PropTypes = {
+SearchBar.propTypes = {
   searchText: PropTypes.string,
-  updateSearchText: PropTypes.func.isRequired,
+  updateSearch: PropTypes.func.isRequired,
 };
 export default SearchBar;

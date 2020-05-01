@@ -1,23 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Book from './Book';
 
-const BookSearch = ({ booksFounded }) => {
-  return (
-    <div className="search-books-results">
-      {booksFounded && (
-        <ol className="books-grid">
-          {booksFounded.map((book) => (
-            <li key={book.id}>{book.title}</li>
+const SearchResult = ({ booksFounded, changeShelf }) => {
+
+  return <div className="search-books-results">
+      <ol className="books-grid">
+        {booksFounded.length > 0 &&
+          booksFounded.map((book) => (
+            <Book
+              key={book.id}
+              book={book}
+              changeShelf={changeShelf}
+            />
           ))}
-        </ol>
-      )}
-    </div>
-  );
+      </ol>
+    </div>;
 };
 
-BookSearch.PropTypes = {
-  library: PropTypes.array.isRequired,
+SearchResult.propTypes = {
+  books: PropTypes.array.isRequired,
   booksFounded: PropTypes.array.isRequired,
+  changeShelf: PropTypes.func.isRequired,
 };
 
-export default BookSearch;
+export default SearchResult;
