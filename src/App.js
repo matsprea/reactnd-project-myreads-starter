@@ -17,41 +17,13 @@ const BooksApp = () => {
 
   useEffect(loadLibraryOnce, []);
 
-  const removeBook = ({ id }) => {
-    const newBooks = books.filter((b) => b.id !== id);
-    setBooks(newBooks);
-  };
-
-  const updatedBook = ({ id }, shelf) => {
-    const newBooks = books.map((b) => {
-      if (b.id === id) {
-        b.shelf = shelf;
-      }
-      return b;
-    });
-    setBooks(newBooks);
-  };
-
-  const addBook = (book, shelf) => {
-    const newBooks = [...books, { ...book, shelf: shelf }];
-    setBooks(newBooks);
-  };
-
-  const findBook = ({ id }) => {
-    const bookFound = books.find((b) => b.id === id);
-    return bookFound;
-  };
-
   const changeShelf = (book, shelf) => {
-    if (shelf === 'none') {
-      removeBook(book);
-    } else {
-      if (findBook(book)) {
-        updatedBook(book, shelf);
-      } else {
-        addBook(book, shelf);
-      }
-    }
+    const newBook = {...book, shelf: shelf};
+    const newBooks = books.filter((b) => (b.id !== book.id)).concat([newBook]);
+
+    BooksAPI.update(book, shelf).then(() => {
+      setBooks(newBooks);
+    });
   };
 
   return (

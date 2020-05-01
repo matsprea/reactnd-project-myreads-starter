@@ -5,6 +5,7 @@ import shelves from './shelves';
 import Shelf from './Shelf';
 
 const Library = ({ books, changeShelf }) => {
+  
   const booksOnAShelf = (shelf) => {
     return books.filter((book) => book.shelf === shelf.id);
   };

@@ -4,10 +4,10 @@ import Book from './Book';
 
 const SearchResult = ({ booksFounded, changeShelf }) => {
 
+
   return <div className="search-books-results">
       <ol className="books-grid">
-        {booksFounded.length > 0 &&
-          booksFounded.map((book) => (
+        {booksFounded.map((book) => (
             <Book
               key={book.id}
               book={book}
